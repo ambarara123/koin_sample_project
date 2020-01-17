@@ -21,7 +21,7 @@ class PreferenceHelper (context: Context){
         return "fake content"
     }
 
-    fun getShouldShowFragment():Boolean{
+    fun getShouldShowFragment(): Boolean{
         return preferences.getBoolean(showFragmentKey,false)
     }
 }
