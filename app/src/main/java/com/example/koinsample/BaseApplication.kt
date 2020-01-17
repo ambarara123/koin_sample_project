@@ -1,6 +1,8 @@
 package com.example.koinsample
 
 import android.app.Application
+import com.example.koinsample.data.repositoryModule
+import com.example.koinsample.network.networkModule
 import com.example.koinsample.ui.mainFragmentModule
 import com.example.koinsample.ui.mainViewModelModule
 import com.example.koinsample.utils.prefModule
@@ -14,7 +16,8 @@ class BaseApplication : Application(){
         startKoin {
             androidLogger()
             androidContext(this@BaseApplication)
-            modules(listOf(prefModule, mainFragmentModule, mainViewModelModule))
+            modules(listOf(prefModule, mainFragmentModule, mainViewModelModule, repositoryModule,
+                networkModule))
         }
     }
 }

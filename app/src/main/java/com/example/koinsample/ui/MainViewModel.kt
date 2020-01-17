@@ -1,18 +1,27 @@
 package com.example.koinsample.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.koinsample.utils.PreferenceHelper
+import androidx.lifecycle.viewModelScope
+import com.example.koinsample.data.MainRepository
+import kotlinx.coroutines.launch
 import org.koin.dsl.module
 
 val mainViewModelModule = module {
     factory { MainViewModel(get()) }
 }
 
-class MainViewModel(preferenceHelper: PreferenceHelper) : ViewModel(){
-     val fragmentContent = MutableLiveData<String>()
+class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    init {
-        fragmentContent.value = preferenceHelper.getFragmentContent()
+    private val _networkLiveData = MutableLiveData<String>()
+
+    val networkLiveData: LiveData<String>
+        get() = _networkLiveData
+
+    fun getData() {
+        viewModelScope.launch {
+            _networkLiveData.value = mainRepository.getData().body()
+        }
     }
 }

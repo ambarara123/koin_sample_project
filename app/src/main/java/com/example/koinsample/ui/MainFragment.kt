@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         super.onCreateView(inflater, container, savedInstanceState)
-        mainViewModel.fragmentContent.observe(viewLifecycleOwner,observer)
+        mainViewModel.networkLiveData.observe(viewLifecycleOwner,observer)
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
